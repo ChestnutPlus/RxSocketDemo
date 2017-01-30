@@ -47,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                 );
+
+        //监听Socket的连接状态
+        RxSocket.getInstance().socketStatusListener()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(socketStatus -> {
+                    LogToast("socketStatus:" + socketStatus.name());
+                });
     }
 
     private View.OnClickListener clickListener = new View.OnClickListener() {
